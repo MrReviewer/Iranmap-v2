@@ -1,0 +1,928 @@
+/*
+ * Iran Map - SVG and Responsive.
+ * Free and open source.
+ * Version 1.1.0
+ * By: MohammadReza Pourmohammad.
+ * Email: mohammadrpm@gmail.com
+ * Web: http://mrpm.ir
+ */
+
+#IranMap{
+    display: flex;
+    flex-flow: row wrap;
+    position: relative;
+    direction: rtl;
+    text-align: right;
+    padding: 0;
+    font-family: Tahoma;
+    font-size: 11px;
+    width: 90%;
+    margin: 50px auto;
+}
+
+#IranMap .show-title{
+    display: none;
+    position: absolute;
+    background-color: rgb(121, 58, 58);
+    color: #fff;
+    margin: 0 !important;
+    padding: 0 5px;
+    text-align: center;
+    line-height: 26px;
+    border-radius: 5px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    opacity: 0.8;
+}
+
+#IranMap .map{
+    display: block;
+    float: left;
+    width: 50%;
+    text-align: left;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    /*background-color: red;*/
+}
+#IranMap .map svg{
+    height: 500px;
+    width: 500px;
+}
+#IranMap .map .border path, #IranMap .map .island path{
+    fill: #fff;
+}
+#IranMap .map .province path{
+    fill: #999;
+}
+#IranMap .map .sea path, #IranMap .map .lake path{
+    fill: #6caed8;
+}
+#IranMap .map .province path:hover, #IranMap .map .island path:hover, #IranMap .map .province path.hover, #IranMap .map .island path.hover{
+    fill: #c33a2c !important;
+    cursor: pointer;
+}
+
+#IranMap .list{
+    display: none;
+    float: right;
+    width: 50%;
+}
+#IranMap .list ul{
+    padding: 0;
+}
+#IranMap .list>ul{
+    margin-left: 10px;
+}
+#IranMap .list li{
+    list-style: none;
+}
+#IranMap .list span{
+    background: #45db32;
+    color: #ecf0f1;
+    display: block;
+    margin: 0 2px;
+    padding: 0 8px;
+    line-height: 26px;
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+#IranMap .list li ul li{
+    display: block;
+    float: right;
+    width: 33.33333333333333%;
+}
+#IranMap .list li ul li a{
+    background: #34495e;
+    color: #ecf0f1;
+    display: block;
+    padding: 0 8px;
+    line-height: 26px;
+    margin: 2px 2px;
+    text-decoration: none;
+}
+#IranMap .list li ul li a:hover, #IranMap .list li ul li a.hover{
+    background: #c33a2c;
+}
+#IranMap .list ul:before, #IranMap .list ul:after{
+    display: table;
+    content: " ";
+}
+#IranMap .list ul, #IranMap .list ul:after{
+    clear: both;
+}
+
+#IranMap .city{
+    clear: both;
+    padding: 10px 0;
+}
+
+@media(max-width: 930px){
+    #IranMap .list{
+        width: 50%;
+    }
+}
+@media(max-width: 745px){
+    #IranMap .list li ul li{
+        width: 50%;
+    }
+}
+@media(max-width: 515px){
+    #IranMap .list, #IranMap .map{
+        width: 100%;
+    }
+    #IranMap .list li ul li{
+        width: 33.33333333333333%;
+    }
+    #IranMap .list li ul li a{
+        font-size: 10px !important;
+    }
+}
+@media(max-width: 515px){
+    #IranMap .list li ul li{
+        width: 50%;
+    }
+}
+@media(max-width: 250px){
+    #IranMap .list li ul li{
+        width: 100%;
+    }
+}
+
+
+/* added code ---------- */
+
+@font-face{
+    src: url(/font/Yekan.ttf);
+    font-family: iranyekan;
+}
+@font-face{
+    src: url(/font/pixelboy-Casablanca.ttf);
+    font-family: casablanca;
+}
+
+.casablanca{
+    font-family: casablanca;
+}
+.iranyekan{
+    font-family: iranyekan;
+}
+.map-content{
+    width: 50%;
+    background-color: #999;
+    height: 580px;
+    border-radius: 5px;
+  
+   
+}
+.map-content>.data-content{
+    display: block;
+}
+
+
+.title-text{
+    /*background-color: black;*/
+    color: white;
+    font-family: casablanca;
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    margin-top: 80px;
+}
+.select-type{
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    /*background-color: thistle;*/
+    height: 50px;
+}
+.select-type > .job-btn-content{
+    display: flex;
+    flex-flow: row wrap;
+    /*background-color: wheat;*/
+    width: 50%;
+    justify-content: center;
+    border-left: 2px dotted white;
+    
+}
+.select-type > .service-btn-content{
+    display: flex;
+    flex-flow: row wrap;
+    /*background-color: rgb(255, 36, 171);*/
+    width: 50%;
+    justify-content: center;
+}
+.job-btn-content > .job-btn { 
+    background-color: rgba(28, 29, 32, 0.808);
+
+width: 150px;
+height: 35px;
+margin-top: 7px;
+border-radius: 4px;
+transition: width 0.2s linear;
+font-size: 15px;
+color: white;
+}
+.job-btn:hover{
+    width: 160px;
+    height: 40px;
+}
+
+.job-btn-content > .job-btn-type { 
+    background-color: rgba(28, 29, 32, 0.808);
+   
+    width: 150px;
+    height: 35px;
+    margin-top: 7px;
+    border-radius: 4px;
+    transition: width 0.2s linear;
+    font-size: 15px;
+    color: white;
+    }
+    .job-btn-type:hover{
+        width: 160px;
+        height: 40px;
+    
+    
+    }
+    .job-btn-content > .filter-clean { 
+        background-color:  rgb(187, 95, 95);
+        
+        width: 150px;
+        height: 35px;
+        margin-top: 7px;
+        border-radius: 4px;
+        transition: width 0.2s linear;
+        font-size: 15px;
+        color: white;
+        }
+        .filter-clean:hover{
+            width: 160px;
+            height: 40px;
+        
+        
+        }
+
+
+.service-btn-content > .service-btn { 
+    background-color: rgba(28, 29, 32, 0.808);
+    
+    width: 150px;
+    height: 35px;
+    margin-top: 7px;
+    border-radius: 4px;
+    transition: width 0.2s linear;
+    font-size: 15px;
+    color: white;
+    }
+    .service-btn:hover{
+        width: 160px;
+        height: 40px;
+    }
+.service-btn-content > .service-btn-type { 
+        background-color: rgba(28, 29, 32, 0.808);
+       
+        width: 150px;
+        height: 35px;
+        margin-top: 7px;
+        border-radius: 4px;
+        transition: width 0.2s linear;
+        font-size: 15px;
+        color: white;
+        }
+        .service-btn-type:hover{
+            width: 160px;
+            height: 40px;
+        }
+
+.service-btn-content > .show-data { 
+            background-color: rgb(124, 187, 95);
+            
+            width: 150px;
+            height: 35px;
+            margin-top: 7px;
+            border-radius: 4px;
+            transition:  0.2s ;
+            font-size: 15px;
+            color: white;
+            }
+        .show-data:hover{
+            width: 160px;
+            height: 40px;
+            
+            }
+        
+    
+
+
+
+
+.data-choice{
+    font-size: 16px;
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    height: 4px;
+}
+.data-choice-button{
+   /* background-color: violet;*/
+    font-size: 20px;
+}
+.dt-content{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    height: 80px;
+    
+}
+.dt-content > .job{
+    width: 50%;
+}
+.dt-content > .service{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    background-color: #999;
+    height: 80px;
+    color: white;
+   
+}
+.dt-content>.year-province-data{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+   /* background-color: tomato;*/
+    height: 80px;
+   
+}
+.year-province-data>.year-data{
+    display: flex;
+    flex-flow: row wrap;
+    /*background-color: rgb(255, 36, 171);*/
+    width: 50%;
+    justify-content: center;
+    color: white;
+}
+.year-province-data>.province-data{
+    display: flex;
+    flex-flow: row wrap;
+    /*background-color: rgb(73, 36, 206);*/
+    width: 50%;
+    justify-content: center;
+    color: white;
+}
+
+
+.lable-text{
+    margin-right: px;
+    padding: 6px;
+    font-family: iranyekan;
+    font-size: 14px;
+}
+
+
+/* ----- footer ------*/
+.footer-container{
+    
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #032a63;
+    color: white;
+    display: flex;
+    flex-flow: row wrap;
+ 
+}
+.footer-text{
+   /* background-color: rgb(124, 182, 101);*/
+    width: 50%;
+    font-family: iranyekan;
+    display: flex;
+    flex-flow: row wrap;
+}
+.footer-img{
+    /*background-color: rgb(49, 120, 129);*/
+    width: 50%;
+
+}
+
+.footer-text>.compenies-label{
+    width: 100%;
+    background-color: #032a63;
+}
+.footer-text>.compenies-logo-container{
+width: 100%;
+display: flex;
+/*background-color: #6caed8;*/
+height: 130px;
+}
+.compenies-logo-container>.compenies-logo{
+    width: 24%;
+    /*background-color: #962d22;*/
+    /*border: 2px solid #45db32;*/
+    margin: 3px;
+}
+.compenies-logo>.img-logo{
+    width: 100%;
+    height: 100%;
+}
+
+
+/* nav bar */
+
+
+.topnav {
+    overflow: hidden;
+    background-color: #032a63;
+    border-top: 2px solid white;
+    font-family: iranyekan;
+    
+  }
+  
+  .topnav a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    
+  }
+  
+  .active {
+    background-color: #4CAF50;
+    color: white;
+    
+  }
+  
+  .topnav .icon {
+    display: none;
+  }
+  
+  .dropdown1 {
+    float: right;
+    overflow: hidden;
+    
+    
+    
+  }
+  
+  .dropdown1 .dropbtn {
+    font-size: 17px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: iranyekan;
+    margin: 0;
+    
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: right;
+  }
+  
+  .topnav a:hover, .dropdown1:hover .dropbtn {
+    background-color: #555;
+    color: white;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .dropdown1:hover .dropdown-content {
+    display: block;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .topnav a:not(:first-child), .dropdown1 .dropbtn {
+      display: none;
+    }
+    .topnav a.icon {
+      float: left;
+      display: block;
+      
+    }
+    .active {
+        background-color: #c53218;
+        color: white;
+        margin-top: 6px;
+        
+        
+        
+        
+      }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: right;
+      
+    }
+    .topnav.responsive .dropdown1 {float: none;}
+    .topnav.responsive .dropdown-content {position: relative;}
+    .topnav.responsive .dropdown1 .dropbtn {
+      display: block;
+      width: 100%;
+      text-align: right;
+   
+    }
+    .topnav>.icon{
+        
+        text-align: left;
+    }
+   
+  }
+
+/* nav-bar end */  
+
+@media (max-width: 991px){
+
+    #IranMap{
+        display: flex;
+        flex-flow: row wrap;
+        flex-direction: column-reverse;
+        position: relative;
+        direction: rtl;
+        text-align: right;
+        padding: 0;
+        font-family: Tahoma;
+        font-size: 11px;
+        width: 90%;
+        margin: 50px auto;
+    }
+    .map-content{
+      width: 100%;
+      height: 400px;
+       
+    }
+    .title-text{
+        margin-top:10px ;
+    }
+    #IranMap .map{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+    }
+}
+
+/*------- Result value  --------*/ 
+
+.data-result-content{
+    display: none;
+    background-color: #999;
+    height: 580px;
+    transition: all 1s linear;
+}
+
+.data-result-content>.close-result{
+    width: 130px;
+    background-color: #999;
+    color: white;
+    display: flex;
+    height: 35px;
+    font-family: iranyekan;
+    padding: 7px;
+    font-size: 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    
+    
+   
+}
+.close-result>.undo-icon-rotate{
+    transform: rotate(0deg);
+    transition: transform 0.3s linear;
+}
+.close-result:hover>.undo-icon-rotate{
+    transform: rotate(-180deg);
+}
+
+.title-text-result{
+    /*background-color: black;*/
+    color: white;
+    font-family: casablanca;
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    margin-top: 0px;
+    
+}
+
+
+.data-result-content>.data-result{
+    width: 100%;
+    /*background-color: tomato;*/
+    display: flex;
+    height: 70px;
+    margin-top: 5px;
+   
+    
+}
+.data-result>.result-type{
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    /*background-color: gray;*/
+    border-left: 1px dotted white;
+   
+}
+.result-type>.type-title{
+    background-color: rgba(28, 29, 32, 0.808);
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 4px;
+    color: white;
+}
+.type-title>p{
+
+font-family: casablanca;
+font-size: 14px;
+}
+.data-result>.result-value{
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    /*background-color: rgb(44, 28, 119);*/
+}
+.result-value>.value-amount{
+    background-color: rgba(28, 29, 32, 0.808);
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 4px;
+    color: white;
+}
+.type-title>p{
+
+font-family: casablanca;
+font-size: 14px;
+}
+.value-amount>p{
+    
+    font-family: casablanca;
+    font-size: 14px;
+    }
+    
+
+/*------- Result value end  --------*/  
+
+
+
+/* select option custom css */ 
+
+.select-hidden {
+    display: none;
+    visibility: hidden;
+    padding-right: 10px;
+  }
+  
+  .select {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    font-size: 13px;
+    color: #fff;
+    width: 90%;
+    height: 40px;
+    
+  }
+  
+  .select-styled {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(37, 35, 35);
+    padding: 8px 15px;
+    -moz-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+    border-radius: 5px;
+    border: 1px solid white;
+    width: 99%;
+    
+  }
+ 
+  .select-styled:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-color: #fff transparent transparent transparent;
+    position: absolute;
+    top: 16px;
+    left: 10px;
+    
+  }
+  .select-styled:hover {
+    background-color: #b83729;
+  }
+  .select-styled:active, .select-styled.active {
+    background-color: #ab3326;
+  }
+  .select-styled:active:after, .select-styled.active:after {
+    top: 9px;
+    border-color: transparent transparent #fff transparent;
+    
+  }
+  
+  .select-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    left: 0;
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: #704540;
+    height: 200px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    width: 95%;
+    margin: auto;
+    
+  }
+
+
+  .select-options ::-webkit-scrollbar {
+    display: none;
+  }
+  .select-options {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .select-options li {
+    margin: 0;
+    padding: 12px 0;
+    text-indent: 15px;
+    border-top: 1px solid #962d22;
+    -moz-transition: all 0.15s ease-in;
+    -o-transition: all 0.15s ease-in;
+    -webkit-transition: all 0.15s ease-in;
+    transition: all 0.15s ease-in;
+  }
+  .select-options li:hover {
+    color: #c0392b;
+    background: #fff;
+  }
+  .select-options li[rel="hide"] {
+    display: none;
+  }
+
+  /* select option custom css */
+
+  
+  /* table content-------*/
+
+  .table-content{
+     /* background-color: rgb(65, 32, 65);*/
+      color: white;
+
+  }
+
+
+
+
+
+
+
+/* table content------ end */
+
+
+
+/*------Tool Tip------*/
+
+.tooltip-1{
+    position: absolute;
+    top: 10%;
+    right: 1%;
+    background-color: #b83729;
+    width: 160px;
+    height: 60px;
+    color: white;
+    overflow: hidden;
+    border-radius: 5px;
+    display: none;
+
+}
+
+.job-btn:hover + .tooltip-1{
+    background-color: #032a63;
+    display: flex;
+}
+.tooltip-2{
+    position: absolute;
+    top: 10%;
+    right: 39%;
+    background-color: #b83729;
+    width: 160px;
+    height: 60px;
+    color: white;
+    overflow: hidden;
+    border-radius: 5px;
+    display: none;
+
+}
+.service-btn:hover + .tooltip-2{
+    background-color: #032a63;
+    display: flex;
+}
+.tooltip-3{
+    position: absolute;
+    top: 34%;
+    right: 1%;
+    background-color: #b83729;
+    width: 160px;
+    height: 60px;
+    color: white;
+    overflow: hidden;
+    border-radius: 5px;
+    display: none;
+
+}
+.job-btn-type:hover + .tooltip-3{
+    background-color: #032a63;
+    display: flex;
+}
+.tooltip-4{
+    position: absolute;
+    top: 34%;
+    right: 39%;
+    background-color: #b83729;
+    width: 160px;
+    height: 60px;
+    color: white;
+    overflow: hidden;
+    border-radius: 5px;
+    display: none;
+
+}
+.service-btn-type:hover + .tooltip-4{
+    background-color: #032a63;
+    display: flex;
+}
+
+@media(max-width: 991px){
+    .job-btn:hover + .tooltip-1{
+      display: none;
+    }
+    .service-btn:hover + .tooltip-2{
+        display: none;
+    }
+    .job-btn-type:hover + .tooltip-3{
+        display: none;
+    }
+    .service-btn-type:hover + .tooltip-4{
+        display: none;
+    }
+}
+
+
+
+/*------Tool Tip end------*/
